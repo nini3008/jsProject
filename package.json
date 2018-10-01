@@ -1,0 +1,36 @@
+{
+  "name": "jsproject",
+  "version": "1.0.0",
+  "description": "Js Projects Starter Repo",
+  "main": "y",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nini3008/jsProject.git"
+  },
+  "author": "Nicholas Iloba",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nini3008/jsProject/issues"
+  },
+  "homepage": "https://github.com/nini3008/jsProject#readme",
+  "dependencies": {
+    "@babel/core": "^7.1.2",
+    "flickity": "^2.1.2",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
+  }
+}
