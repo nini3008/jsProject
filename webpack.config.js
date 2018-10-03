@@ -1,6 +1,6 @@
 // webpack v4
 const path = require("path");
-// const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackMd5Hash = require("webpack-md5-hash");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -11,8 +11,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[chunkhash].js"
+    // publicPath: "/dist"
   },
-  devtool: "inline-source-map",
+  devtool: false,
   module: {
     rules: [
       {
@@ -33,28 +34,39 @@ module.exports = {
         ]
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg)$/,
         use: [
-          "file-loader",
           {
-            loader: "image-webpack-loader",
+            loader: "url-loader",
             options: {
-              bypassOnDebug: true
+              limit: 16000, // base64 encode images smaller than 16k
+              name: "img/[name].[hash:7].[ext]"
             }
+          },
+          {
+            loader: "image-webpack-loader"
           }
         ]
       },
       {
-        test: /\.(woff(2)?|ttf|eot|otf)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: "url-loader",
+        options: {
+          limit: 10000,
+          name: "font/[name].[hash:7].[ext]"
+        }
+      },
+      {
+        test: /\.html$/,
         use: [
           {
             loader: "file-loader",
             options: {
-              name: "[name].[ext]",
-              outputPath: "fonts/"
+              name: "[name].[hash:7].[ext]"
             }
           }
-        ]
+        ],
+        exclude: path.resolve(__dirname, "src/index.html")
       }
     ]
   },
@@ -66,9 +78,20 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: false,
       hash: true,
-      template: "./src/index.html",
-      filename: "index.html"
+      filename: "index.html",
+      template: "./src/index.html"
     }),
-    new WebpackMd5Hash()
+    // new HtmlWebpackPlugin({
+    //   filename: "about.html",
+    //   template: "./src/about.html"
+    // }),
+    new WebpackMd5Hash(),
+    new webpack.SourceMapDevToolPlugin({
+      filename: "[name].js.map"
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    })
   ]
 };

@@ -4,6 +4,7 @@
   "description": "Js Projects Starter Repo",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --mode development --open",
     "dev": "webpack --mode development",
     "build": "webpack --mode production"
   },
@@ -18,12 +19,13 @@
   },
   "homepage": "https://github.com/nini3008/jsProject#readme",
   "dependencies": {
-    "@babel/core": "^7.1.2",
     "flickity": "^2.1.2",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
     "autoprefixer": "^9.1.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4",
@@ -39,8 +41,10 @@
     "postcss-loader": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
+    "url-loader": "^1.1.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9",
     "webpack-md5-hash": "0.0.6"
   }
 }
